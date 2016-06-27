@@ -1,33 +1,15 @@
 fileFormatVersion: 2
-guid: a22e6f44ab51b0d40b7ccb0885a56b5f
-timeCreated: 1466878289
+guid: 7cbad27b7c878894c98a22a8ff5734ef
+timeCreated: 1467020037
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Camera
-    100004: Cube
-    100006: Cube_MeshPart0
-    100008: Cube_MeshPart1
-    100010: Cube_MeshPart2
-    100012: Lamp
     400000: //RootNode
-    400002: Camera
-    400004: Cube
-    400006: Cube_MeshPart0
-    400008: Cube_MeshPart1
-    400010: Cube_MeshPart2
-    400012: Lamp
-    2300000: Cube_MeshPart0
-    2300002: Cube_MeshPart1
-    2300004: Cube_MeshPart2
-    3300000: Cube_MeshPart0
-    3300002: Cube_MeshPart1
-    3300004: Cube_MeshPart2
-    4300000: Cube_MeshPart0
-    4300002: Cube_MeshPart1
-    4300004: Cube_MeshPart2
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube
   materials:
     importMaterials: 1
     materialName: 0
