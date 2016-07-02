@@ -89,15 +89,15 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 349.13794
+        second: 262
       data:
         first:
           name: _FresnelScale
-        second: 0.5
+        second: 0.66
       data:
         first:
           name: _GerstnerIntensity
-        second: 0.39
+        second: 1
       data:
         first:
           name: _HeightDisplacement
@@ -138,11 +138,11 @@ Material:
       data:
         first:
           name: _BaseColor
-        second: {r: 0.17275561, g: 0.224076, b: 0.24626863, a: 0.5058824}
+        second: {r: 0.16896853, g: 0.18656941, b: 0.23937207, a: 0.5058824}
       data:
         first:
           name: _ReflectionColor
-        second: {r: 0.47582978, g: 0.6064865, b: 0.6641791, a: 0.47058824}
+        second: {r: 0.4785996, g: 0.5004325, b: 0.6641791, a: 0.47058824}
       data:
         first:
           name: _SpecularColor
@@ -158,7 +158,7 @@ Material:
       data:
         first:
           name: _GAmplitude
-        second: {r: 0.3, g: 0.2, b: 0.25, a: 0.25}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _GFrequency
