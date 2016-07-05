@@ -45,9 +45,7 @@ public class MovePlayer : MonoBehaviour {
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation,
                     Quaternion.LookRotation(dir), possibleRotation * rotationSpees * Time.deltaTime);
-
             }
-
         }
     }
 
