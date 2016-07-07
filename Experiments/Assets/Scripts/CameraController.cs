@@ -3,27 +3,35 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
+
      float xRotation;
      float yRotation;
-     float speedRotation = 3f;
+     float speedRotation = 2f;
 
      float currentXrotation;
      float currentYrotation;
      float xRotationVelocity;
      float yRotationVelocity;
-    // public float SmouthDampTime = 0.1f;
 
-    float CamMax = 50f;
-    float CamMin = -20f;
+    float CamMax = 9f;
+    float CamMin = 0f;
 
     float TransX;
     float TransZ;
+
+    void Start()
+    {
+        Debug.Log("x :" + xRotation);
+        Debug.Log("y :" + yRotation);
+    }
 
     void Update()
     {
         CameraRotation();
         CameraZoom();
         CameraTranslater();
+        Debug.Log("x :" + xRotation);
+        Debug.Log("y :" + yRotation);
     }
 
     void CameraRotation () {
@@ -45,25 +53,25 @@ public class CameraController : MonoBehaviour {
 
     void CameraZoom()
     {
-        if ((Input.GetAxis("Mouse ScrollWhel") < 0) && (Camera.main.transform.rotation.y < CamMax))
-            {
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 
-                                                  Camera.main.transform.position.y +0.1f, 
-                                                  Camera.main.transform.position.z);
-            }
-        if ((Input.GetAxis("Mouse ScrollWhel") > 0) && (Camera.main.transform.rotation.y > CamMin))
+        if ((Input.GetAxis("Mouse ScrollWheel") < 0) && (Camera.main.transform.position.y < CamMax))
         {
             Camera.main.transform.position = new Vector3(Camera.main.transform.position.x,
-                                                  Camera.main.transform.position.y + 0.1f, 
+                                                  Camera.main.transform.position.y + 0.1f,
+                                                  Camera.main.transform.position.z);
+        }
+        if ((Input.GetAxis("Mouse ScrollWheel") > 0) && (Camera.main.transform.position.y > CamMin))
+        {
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x,
+                                                  Camera.main.transform.position.y - 0.1f,
                                                   Camera.main.transform.position.z);
         }
     }
 
     void CameraTranslater()
     {
-        TransX = Input.GetAxis("Horizontal") * 2.5f * Time.deltaTime;
-        TransZ = Input.GetAxis("Vertical") * 2.5f * Time.deltaTime;
-
+        TransX = Input.GetAxis("Horizontal") * 1.5f * Time.deltaTime;
+        TransZ = Input.GetAxis("Vertical") * 1.5f * Time.deltaTime;
+        // прыгало тут!
         Camera.main.transform.Translate(TransX, 0, TransZ);
     }
 }

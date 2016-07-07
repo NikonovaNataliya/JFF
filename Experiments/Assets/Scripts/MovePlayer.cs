@@ -23,7 +23,7 @@ public class MovePlayer : MonoBehaviour {
                 target = hit.point;
             }
         }
-        float possibleRotation = MoveTo();
+        MoveTo();
         LookAtThis( 1.0f );
 	}
 
@@ -36,11 +36,9 @@ public class MovePlayer : MonoBehaviour {
 
     private void LookAtThis( float possibleRotation )
     {
+        float angleToTarget = CalculateAngle(target);
         if (target != lastTarget)
         {
-
-            float angleToTarget = CalculateAngle(target);
-            Debug.Log("angleToTarget : " + angleToTarget);
             if (angleToTarget > 3)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation,
