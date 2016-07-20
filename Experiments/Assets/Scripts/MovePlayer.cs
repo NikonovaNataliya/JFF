@@ -12,7 +12,7 @@ public class MovePlayer : MonoBehaviour {
     private Vector3 target = new Vector3();
     private Vector3 lastTarget = new Vector3();
 	
-	// Update is called once per frame
+
 	void Update () {
 
         if (Input.GetMouseButton(1)) {
@@ -24,7 +24,7 @@ public class MovePlayer : MonoBehaviour {
             }
         }
         MoveTo();
-        LookAtThis( 1.0f );
+        //LookAtThis( 1.0f );
 	}
 
     private float CalculateAngle(Vector3 temp) {
@@ -33,7 +33,7 @@ public class MovePlayer : MonoBehaviour {
         return Vector3.Angle(dir, transform.forward);
 
     }
-
+/*
     private void LookAtThis( float possibleRotation )
     {
         float angleToTarget = CalculateAngle(target);
@@ -46,7 +46,7 @@ public class MovePlayer : MonoBehaviour {
             }
         }
     }
-
+*/
     private float MoveTo() {
 
         if (target == lastTarget)

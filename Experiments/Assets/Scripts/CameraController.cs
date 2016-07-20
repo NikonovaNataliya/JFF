@@ -6,72 +6,68 @@ public class CameraController : MonoBehaviour {
 
      float xRotation;
      float yRotation;
-     float speedRotation = 2f;
+     float speedRotation = 5.0f;
 
      float currentXrotation;
      float currentYrotation;
      float xRotationVelocity;
      float yRotationVelocity;
 
-    float CamMax = 9f;
-    float CamMin = 0f;
+    //float TransX;
+    //float TransZ;
+    public float speedZoom = 50.0f;
 
-    float TransX;
-    float TransZ;
-
-    void Start()
-    {
-        Debug.Log("x :" + xRotation);
-        Debug.Log("y :" + yRotation);
-    }
+    public bool zooming;
+    public float binocul_speedZoon;
 
     void Update()
     {
         CameraRotation();
         CameraZoom();
-        CameraTranslater();
-        Debug.Log("x :" + xRotation);
-        Debug.Log("y :" + yRotation);
+        Binoculars();
+
     }
 
     void CameraRotation () {
 
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(0))
         {
             xRotation -= Input.GetAxis("Mouse Y") * speedRotation;
             yRotation += Input.GetAxis("Mouse X") * speedRotation;
 
-            xRotation = Mathf.Clamp(xRotation, -85, 85);
+            xRotation = Mathf.Clamp(xRotation, -25, 45);
 
-            currentXrotation = Mathf.SmoothDamp(currentXrotation, xRotation, ref yRotationVelocity, 0.1f);
+            currentXrotation = Mathf.SmoothDamp(currentXrotation, xRotation, ref xRotationVelocity, 0.1f);
             currentYrotation = Mathf.SmoothDamp(currentYrotation, yRotation, ref yRotationVelocity, 0.1f);
 
-            Camera.main.transform.rotation = Quaternion.Euler(currentXrotation, currentYrotation, 0);
+            transform.localRotation = Quaternion.Euler(currentXrotation, currentYrotation, 0);
         }
 
     }
 
     void CameraZoom()
     {
-        if ((Input.GetAxis("Mouse ScrollWheel") < 0) && (Camera.main.transform.position.y < CamMax))
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x,
-                                                  Camera.main.transform.position.y + 0.1f,
-                                                  Camera.main.transform.position.z);
+           Camera.main.transform.Translate(Vector3.forward * speedZoom * Time.deltaTime);
+
         }
-        if ((Input.GetAxis("Mouse ScrollWheel") > 0) && (Camera.main.transform.position.y > CamMin))
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0) 
         {
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x,
-                                                  Camera.main.transform.position.y - 0.1f,
-                                                  Camera.main.transform.position.z);
+            Camera.main.transform.Translate(Vector3.back * speedZoom * Time.deltaTime);
         }
     }
 
-    void CameraTranslater()
-    {
-        TransX = Input.GetAxis("Horizontal") * 1.5f * Time.deltaTime;
-        TransZ = Input.GetAxis("Vertical") * 1.5f * Time.deltaTime;
-        // прыгало тут!
-        Camera.main.transform.Translate(TransX, 0, TransZ);
+    void Binoculars()
+    { 
+        //if (zooming)
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    float zoomDistance = binocul_speedZoon * Input.GetAxis("Vertical") * Time.deltaTime;
+        //    Camera.main.transform.Translate(ray.direction * zoomDistance, Space.World);
+        //}
+
     }
 }

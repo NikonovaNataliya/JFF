@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MovePlayerFirst : MonoBehaviour {
 
+    public GameObject player;
     public float stopStart = 1.5f, speed = 5f, rotationSpeed = 100f, heightPlayer = 1f;
 
     float mag, angelToTarget;
@@ -30,6 +31,10 @@ public class MovePlayerFirst : MonoBehaviour {
     private void CalculateAngel(Vector3 temp)
     {
         dir = new Vector3(temp.x, transform.position.y, temp.z) - transform.position;
+        if( Vector3.Distance( dir, Vector3.zero ) < 25.0f ) {
+            angelToTarget = 0f;
+            return;
+        }
         angelToTarget = Vector3.Angle(dir, transform.forward);
     }
 
@@ -38,7 +43,7 @@ public class MovePlayerFirst : MonoBehaviour {
         if (target != lastTarget)
         {
             CalculateAngel(target);
-            if (angelToTarget > 3)
+            if (angelToTarget > 3.0f)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation,
                                                              Quaternion.LookRotation(dir),
                                                              rotationSpeed * UnityEngine.Time.deltaTime);
