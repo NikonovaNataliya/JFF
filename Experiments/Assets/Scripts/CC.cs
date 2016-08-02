@@ -24,12 +24,12 @@ public class CC : MonoBehaviour {
     void FixedUpdate()  //ускорение и торможение
     {
 
-        transform.rotation *= Quaternion.Euler(0f, inp.x * Time.deltaTime, 0f);
+        tr.rotation *= Quaternion.Euler(0f, inp.x * Time.deltaTime, 0f);
         vel = transform.InverseTransformDirection(rb.velocity);
 
         if (vel.sqrMagnitude > 0.001f)
             vel = Quaternion.Inverse(Quaternion.LookRotation(vel)) * vel * Mathf.Sign(vel.z);
 
-        rb.velocity = transform.TransformDirection(vel + new Vector3(0f, inp.y * Time.deltaTime, inp.z * Time.deltaTime));
+        rb.velocity = tr.TransformDirection(vel + new Vector3(0f, inp.y * Time.deltaTime, inp.z * Time.deltaTime));
     }
 }
