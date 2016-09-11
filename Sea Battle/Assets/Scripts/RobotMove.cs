@@ -14,14 +14,6 @@ public class RobotMove : MonoBehaviour {
 
     void Update () {
 
-        // if (!Input.anyKey)
-        //{
-        //    anim.SetBool("Idle-WalkOver", false);
-        //    anim.SetBool("Idle-Walk", false);
-        //    anim.SetBool("Idle-Turn", false);
-        //    // anim.SetFloat("peace-peace0", 0.5f);
-        //}
-
         if (Input.GetKey(KeyCode.S)) // назад
         {
             transform.position += transform.forward / stopFactor;

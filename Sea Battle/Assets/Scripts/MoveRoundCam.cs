@@ -13,25 +13,22 @@ public class MoveRoundCam : MonoBehaviour {
     public float yminLimit = -10.0f;
     public float ymaxLimit = 80.0f;
     public float speedZoom = 20.0f;
-     Vector3 position;
-    private float x;
+
+    public float x;
     private float y;
+    public Vector3 rot_cam;
 
+    void Start() {
 
-    void Start()
-    {
         Vector3 angles = transform.localEulerAngles;
         x = angles.y;
         y = angles.x;
+        Cursor.lockState = CursorLockMode.Locked;   // Screen.lockCursor
     }
 
-        void LateUpdate()
-    {
+        void LateUpdate() {
 
-        if (!target)
-            return;
-        if (Input.GetMouseButton(2))
-        {
+        if (Input.GetAxis("Mouse X") !=0) {
             x += Input.GetAxis("Mouse X") * xSpeed;
             y -= Input.GetAxis("Mouse Y") * ySpeed;
 
@@ -39,19 +36,21 @@ public class MoveRoundCam : MonoBehaviour {
 
             Quaternion rotation = Quaternion.Euler(y, x, 0);
             transform.localRotation = rotation;
-
-            Vector3 position = /* target.position  */ - (rotation * Vector3.forward * distance);
+            rot_cam = rotation.eulerAngles;
+           // Vector3 rotationAngles = rotation.eulerAngles;   переменная для поворота робота
+           // Debug.Log(rotationAngles);
+             
+            Vector3 position = /* target.position */  - (rotation * Vector3.forward * distance);
             transform.localPosition = position;
         }
-
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        {
-
+        
+        if (Input.GetAxis("Mouse ScrollWheel") != 0) {
+            Vector3 localPosition;
             distance = Vector3.Distance(transform.position, target.position);
             distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel") * speedZoom,
                                    minDistance, maxDistance);
-            position = -(transform.forward * distance) + target.position;
-            transform.position = position;
+            localPosition = -(transform.forward * distance) + target.position;
+            transform.position = localPosition;
         }
     }
 }

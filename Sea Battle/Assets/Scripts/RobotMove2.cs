@@ -3,43 +3,44 @@ using System.Collections;
 
 public class RobotMove2 : MonoBehaviour {
 
+    public GameObject target;
+    public float targetDistance;
     public float speed;
-    public float rotationSpeed;
 
     Animator anim;
+    CharacterController controller;
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
     }
 
 	void Update () {
 
-        float translation = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        transform.Translate( 0, 0, -translation);
+        Vector3 lookPosition = new Vector3(target.transform.position.x, this.transform.position.y, 
+                                           target.transform.position.z);
+        transform.LookAt(lookPosition);
 
+        Vector3 previousPosition = transform.position;
+        //Vector3 currentPosition;
 
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
-        transform.Rotate(0, rotation, 0);
-        if (!Input.anyKey)
-        {
-            anim.SetBool("Idle-Walk", false);
-            anim.SetBool("Idle-WalkOver", false);
-            anim.SetBool("Idle-Turn", false);
+        Vector3 direction = (target.transform.position - transform.position) / (target.transform.position - transform.position).magnitude;
+
+        if(Vector3.Distance(transform.position, target.transform.position)>targetDistance) {
+            transform.position += direction * Time.deltaTime * speed;
+            direction = transform.TransformDirection(direction);
+            controller.Move(direction * Time.deltaTime);
         }
-        if (translation > 0 && translation <= 1)
-        {
-            anim.SetBool("Idle-Walk", true);
-            anim.SetBool("Idle-WalkOver", false);
+
+        Vector3 currentPosition = transform.position;
+       // Debug.Log("2: " + currentPosition);
+
+        if(previousPosition == currentPosition) {
+            anim.SetBool("peace-walking", false);
         }
-        if (translation < 0 && translation >=-1)
-        {
-            anim.SetBool("Idle-WalkOver", true);
-            anim.SetBool("Idle-Walk", false);
+        if (previousPosition != currentPosition) {
+            anim.SetBool("peace-walking", true);
         }
-          if((rotation > 0 && rotation <= 1) || (rotation<0 && rotation>=-1))
-        {
-            anim.SetBool("Idle-Turn", true);
-        }
-	}
+    }
 }
